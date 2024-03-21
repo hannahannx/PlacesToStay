@@ -44,8 +44,9 @@ app.get('/placestostay/accommodation/:location/type/:type',(req,res) => {
     }catch(error){
         res.status(500).json({error:error})
     }
-})
+});
 
+//Task 3 -Book a place of accommodation for a given number of people on a given date.
 
 
 console.log("Web Application Listening at http://localhost:3000")
