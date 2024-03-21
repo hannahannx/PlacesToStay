@@ -35,6 +35,17 @@ app.get('/placestostay/accommodation/:location', (req,res) => {
     }
 });
 
+//Task 2 - Look up all accommodation of a given type in a given location.
+app.get('/placestostay/accommodation/:location/type/:type',(req,res) => {
+    try{
+        const smth = db.prepare(`SELECT * FROM accommodation WHERE location=? AND type=?`)
+        const results = smth.all(req.params.location,req.params.type)
+        res.json(results)
+    }catch(error){
+        res.status(500).json({error:error})
+    }
+})
+
 
 
 console.log("Web Application Listening at http://localhost:3000")
