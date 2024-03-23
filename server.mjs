@@ -47,7 +47,18 @@ app.get('/placestostay/accommodation/:location/type/:type',(req,res) => {
 });
 
 //Task 3 -Book a place of accommodation for a given number of people on a given date.
-
+app.post('/placestostay/accommodation/:accID/availability/:availability/people/:npeople/date/:thedate', (req,res)=>{
+    try{
+        const reduceAvailabilty = db.prepare(`UPDATE acc_dates SET availablity=? WHERE accID=?`)
+        const availabilityResults = reduceAvailabilty.run(req.params.availablity,req.params.accID);
+        const createBooking = db.prepare(`INSERT INTO acc_bookings (accID,thedate,username,npeople) VALUES (?,?,?,?)`)
+        const bookingResults = createBooking.run(req.params.accID,req.params.thedate,req.params.username,req.params.npeople)
+        res.json({id: createBooking.lastInsertRowId});
+        res.status(bookingResults.changes ? 200:404).json({success: bookingResults.changes ? true: false});
+    }catch(error){
+        res.status(500).json({error: error.message});
+    }
+});
 
 console.log("Web Application Listening at http://localhost:3000")
 app.listen(PORT);
