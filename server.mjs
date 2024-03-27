@@ -4,9 +4,9 @@
 import express from 'express';
 import Database from 'better-sqlite3';
 
-const PORT = 3000
+const PORT = 3000;
 const app = express();
-const db = new Database('placestostay.db')
+const db = new Database('placestostay.db');
 
 //home route - should render the index page for later on 
 app.get('/', (req,res)=> {
