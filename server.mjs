@@ -10,7 +10,7 @@ const db = new Database('placestostay.db');
 
 //home route - should render the index page for later on 
 app.get('/', (req,res)=> {
-    res.send('Test');
+    res.send('HomePageTest');
 });
 
 //testing for database connection
