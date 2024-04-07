@@ -1,3 +1,6 @@
+//index.js 
+
+//imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Test from './components/searchAccommodation';
