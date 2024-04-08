@@ -12,6 +12,7 @@ function SearchAccomm(){
         <p style= {{backgroundColor: '#7D869C',color: '#E5E8B6',textAlign:"center"}} key={accommodation.id}>
         Name: {accommodation.name} <br></br>
         Type: {accommodation.type} <br></br>
+        Location {accommodation.location} <br></br>
         Latitude: {accommodation.latitude} <br></br>
         Longitude: {accommodation.longitude} <br></br>
         </p>
@@ -21,7 +22,7 @@ function SearchAccomm(){
                 <h1 style= {{color: '#E5E8B6',textAlign:"center"}}>Places to Stay</h1>
                 <p style={{color:'#B4C4AE'}}>Please enter the location you would like to search for:</p>
                 <input type="button" value='Update Accommodation Name' onClick={updateAccommName}/>
-                <input placeholder="Locaation Name..." id="location"/>
+                <input placeholder="Location Name..." id="location"/>
                 <div style={{color: '#A2ABAB'}}>{currentAccomm}</div>
                 <br></br>
                 <input type="button" value='Search' onClick={displayAllLocation}/>
