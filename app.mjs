@@ -62,14 +62,12 @@ app.post('/placestostay/accommodation/:accID/date/:thedate/people/:npeople', (re
         const bookingResults = createBooking.run(req.params.accID,req.params.thedate,req.params.npeople)
         //reducing the availability acc_dates
         const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? `)
-        const availabilityResults = reduceAvailability.run(req.body.accID);
+        const availabilityResults = reduceAvailability.run(req.params.accID);
         if (availabilityResults.changes == 1){
             res.json({success: 1});
-        }else{
-            res.status(404).json({error: error.message});
+            res.json({id: bookingResults.lastInsertRowId});
         }
         //JSON
-        res.json({id: bookingResults.lastInsertRowId});
     }catch(error){
         res.status(500).json({error: error.message});
     }
