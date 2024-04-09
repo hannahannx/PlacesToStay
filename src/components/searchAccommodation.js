@@ -1,5 +1,5 @@
 // searchAccommodation.js
-
+//Task 4 - Write a HTML page ehich allows users to search for all accommodations in a givven location
 import React from "react";
 
 function SearchAccomm(){
