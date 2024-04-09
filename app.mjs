@@ -55,17 +55,21 @@ app.get('/placestostay/accommodation/:location/type/:type',(req,res) => {
 });
 
 //Task 3 -Book a place of accommodation for a given number of people on a given date.
-app.post('/placestostay/accommodation/:accID/date/:thedate/usernam/people/:npeople/', (req,res)=>{
+app.post('/placestostay/accommodation/:accID/date/:thedate/people/:npeople', (req,res)=>{
     try{
         //adding record to acc_bookings
-        const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,username,npeople) VALUES (?,?,'',?) `) //the username should be in the body - focus on tis later on 
-        const bookingResults = createBooking.run(req.params.accID,req.params.thedate,req.params.thedate)
+        const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,npeople) VALUES (?,?,?) `) //the username should be in the body - focus on tis later on 
+        const bookingResults = createBooking.run(req.params.accID,req.params.thedate,req.params.npeople)
         //reducing the availability acc_dates
-        //const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=(availability-1) WHERE accID=? `)
-       // const availabilityResults = reduceAvailability.run(req.body.availability,req.params.accID)
+        const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? `)
+        const availabilityResults = reduceAvailability.run(req.body.accID);
+        if (availabilityResults.changes == 1){
+            res.json({success: 1});
+        }else{
+            res.status(404).json({error: error.message});
+        }
+        //JSON
         res.json({id: bookingResults.lastInsertRowId});
-        //res.json(availabilityResults)
-       // res.status(availabilityResults.changes ? 200:404).json({success: bookingResults.changes ? true: false});
     }catch(error){
         res.status(500).json({error: error.message});
     }
