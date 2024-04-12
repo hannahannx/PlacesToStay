@@ -1,6 +1,6 @@
 # PlacesToStay
 
-## Short sentence here about what this project is about (one line)
+## A web Application using React.js,Node.js and Express, using AJAX APIs and SQLite.
 
 Intro paragraph
 Summerise what this project is about with keywords (technical words which users would be able to understand /search for)
