@@ -5,11 +5,12 @@ import express from 'express';
 import Database from 'better-sqlite3';
 import cors from 'cors';
 
-
+//variables
 const PORT = 3000;
 const app = express();
 const db = new Database('placestostay.db');
 
+// middleware functions
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
 app.use(cors());
@@ -64,7 +65,6 @@ app.post('/placestostay/accommodation/:accID/date/:thedate/people/:npeople', (re
         const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? `)
         const availabilityResults = reduceAvailability.run(req.params.accID);
         if (availabilityResults.changes == 1){
-            res.json({success: 1});
             res.json({id: bookingResults.lastInsertRowId});
         }
         //JSON
