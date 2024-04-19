@@ -3,7 +3,6 @@
 //imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import SearchAccomm from './components/searchAccommodation';
 import AppComponent from './components/AppComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,0 +1,23 @@
+h1{
+    color: '#E5E8B6';
+    text-align:"center";
+}
+
+h2{
+    color: '#E5E8B6';
+    text-align:"center";
+}
+
+p{
+    color:'#B4C4AE';
+}
+
+.currentLocationDiv{
+    color: '#A2ABAB';
+}
+
+#locationSearchResults{
+    background-color: '#7D869C';
+    color: '#E5E8B6';
+    text-align:"center";
+}
