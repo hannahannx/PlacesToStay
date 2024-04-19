@@ -38,7 +38,7 @@ function SearchAccomm(){
                 <div id='locationSearchResults'>                    
                         {allAccommodations}    
                 </div>
-                /* Map for the elements */
+                /* Map for the elements will go here */
                 <br></br>
             </div>
 
