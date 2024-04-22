@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import SearchAccomm from './searchAccommodation';
 import Footer from './Footer';
 import Header from './Header';
-import "./AppComponent.css"
 import SideNav from './SideNav';
-
+import "./AppComponent.css";
+import BookAccomm from './bookAccommodation';
 
 //using lifting up state 
 function AppComponent(){
 
     return(
-        <main class="main">
+        <main className="main">
             <>
             <Header/>
             <SideNav/>
             <SearchAccomm/>
+            <BookAccomm/>
             <Footer/>
             </>
             
@@ -22,4 +23,4 @@ function AppComponent(){
     )
 }
 
-export default AppComponent
+export default AppComponent;

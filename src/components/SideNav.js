@@ -2,11 +2,11 @@ import React from "react";
 
 function SideNav(){
     return(
-        <div id="sideNav" class="sideNav">
-            <a href="javascript:void(0)" class="closeNav" onClick={closeNavBar}>"&times;</a>
+        <div id="sideNav" className="sideNav">
+            <a href="javascript:void(0)" className="closeNav" onClick={closeNavBar}>"&times;</a>
             <a href="#"> Home </a>
-            <a href="#"> Home </a>
-            <a href="#"> Home </a>
+            <a href="#"> Login </a>
+            <a href="#"> Book Accomodation </a>
 
             <span onClick={openNavBar}>&#9776;</span>
         </div>

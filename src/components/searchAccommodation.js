@@ -1,7 +1,8 @@
 // searchAccommodation.js
 //Task 4 - Write a HTML page which allows users to search for all accommodations in a givven location
 import React from "react";
-import * as css from "./searchAccommodation.css"
+import "./searchAccommodation.css";
+import BookAccomm from "./bookAccommodation";
 
 //function to search for accommodation
 function SearchAccomm(){
@@ -13,12 +14,13 @@ function SearchAccomm(){
     const allAccommodations = searchResults.map (accommodation =>
         //Task 5 - Create a book button for each result 
         <ul key={accommodation.id}>
-        Name: {accommodation.name} <br></br>
+        <span> Name: {accommodation.name} <br></br> </span>
         Type: {accommodation.type} <br></br>
         Location {accommodation.location} <br></br>
         Latitude: {accommodation.latitude} <br></br>
         Longitude: {accommodation.longitude} <br></br>
         <br></br>
+        <button className="bookButton" onClick={BookAccomm}> Book It!</button>
         </ul>
         );
 

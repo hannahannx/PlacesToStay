@@ -1,14 +1,10 @@
-h1{
+.h1, .h2{
     color: '#E5E8B6';
     text-align:"center";
 }
 
-h2{
-    color: '#E5E8B6';
-    text-align:"center";
-}
 
-p{
+.p{
     color:'#B4C4AE';
 }
 
