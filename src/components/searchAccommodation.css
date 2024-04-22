@@ -1,19 +1,34 @@
-.h1, .h2{
-    color: '#E5E8B6';
-    text-align:"center";
+p{
+    color: white;
 }
 
-
-.p{
-    color:'#B4C4AE';
+#currentLocation{
+    color: red;
 }
 
-.currentLocationDiv{
-    color: '#A2ABAB';
+button {
+    border: 2px soild red;
+    border-radius: 25px;
+}
+
+input{
+    width: 10rem;
 }
 
 #locationSearchResults{
-    background-color: '#7D869C';
-    color: '#E5E8B6';
-    text-align:"center";
+    border: #A2ABAB;
+    border-radius: 50px;
+    background-color: #7D869C;
+    color: #E5E8B6;
+    text-align: center;
+}
+
+.searchDiv{
+    background-color: #A2ABAB;
+}
+
+
+h2{
+    color: #E5E8B6;
+    text-align:center;
 }

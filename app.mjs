@@ -58,6 +58,8 @@ app.get('/placestostay/accommodation/:location/type/:type',(req,res) => {
 //Task 3 -Book a place of accommodation for a given number of people on a given date.
 app.post('/placestostay/accommodation/:accID/date/:thedate/people/:npeople', (req,res)=>{
     try{
+        //checking if any of the fields are blank 
+        
         //adding record to acc_bookings
         const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,npeople) VALUES (?,?,?) `) //the username should be in the body - focus on tis later on 
         const bookingResults = createBooking.run(req.params.accID,req.params.thedate,req.params.npeople)

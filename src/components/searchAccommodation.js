@@ -2,7 +2,6 @@
 //Task 4 - Write a HTML page which allows users to search for all accommodations in a givven location
 import React from "react";
 import "./searchAccommodation.css";
-import BookAccomm from "./bookAccommodation";
 
 //function to search for accommodation
 function SearchAccomm(){
@@ -20,26 +19,25 @@ function SearchAccomm(){
         Latitude: {accommodation.latitude} <br></br>
         Longitude: {accommodation.longitude} <br></br>
         <br></br>
-        <button className="bookButton" onClick={BookAccomm}> Book It!</button>
+        <button id="bookButton" onClick={bookAccomm}> Book It!</button>
         </ul>
         );
 
     //Returning the JSX with inline styles 
-    return  <div>
+    return  <div className="searchDiv">
                 <p>Please enter the location you would like to search for:</p>
-                <input type="button" value='Update Accommodation Name' onClick={updateAccommName}/>
+                <button onClick={updateAccommName}>Update Accommodation Name</button>
                 <input placeholder="Location Name..." id="location"/>
                 <p>After changing the location name , please click the "update accommodation name" button!</p>
+                <p id='currentLocation' > Current Location:{currentAccomm}</p>
                 <br></br>
-                <div> Current Location: {currentAccomm}<br></br></div>
+                <button onClick={displayAllLocation} >Search</button>
                 <br></br>
-                <input type="button" value='Search' onClick={displayAllLocation}/>
-                <br></br>
-                <br></br>
-                <h2 >Results</h2>
+                <h2>Results</h2>
                 <div id='locationSearchResults'>                    
                         {allAccommodations}    
                 </div>
+                <br></br>
             </div>
 
 //nested function to update the state of the current accommodation displayed
@@ -55,5 +53,13 @@ async function displayAllLocation(){
 }           
 }
 
+async function bookAccomm (){
+    bookButton.addEventListener('click', async() =>{
+        const response2 = await fetch(`http://localhost:3000/placestostay/accommodation/${accommodation.id}/date/${240601}people/${80}`, {
+            method: 'POST'
+        });
+    })
+
+}
 //exporting the function 
 export default SearchAccomm

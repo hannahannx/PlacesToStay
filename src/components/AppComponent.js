@@ -4,21 +4,20 @@ import Footer from './Footer';
 import Header from './Header';
 import SideNav from './SideNav';
 import "./AppComponent.css";
-import BookAccomm from './bookAccommodation';
 
 //using lifting up state 
 function AppComponent(){
 
     return(
-        <main className="main">
+           <main>
             <>
             <Header/>
-            <SideNav/>
+            {/* <SideNav/> */}
             <SearchAccomm/>
-            <BookAccomm/>
             <Footer/>
             </>
-            
+
+            {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}
         </main>
     )
 }
