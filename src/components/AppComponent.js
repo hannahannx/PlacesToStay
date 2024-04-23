@@ -6,15 +6,15 @@ import SideNav from './SideNav';
 import "./AppComponent.css";
 
 //using lifting up state 
-function AppComponent(){
+function AppComponent() {
 
-    return(
-           <main>
+    return (
+        <main>
             <>
-            <Header/>
-            {/* <SideNav/> */}
-            <SearchAccomm/>
-            <Footer/>
+                <Header />
+                {/* <SideNav/> */}
+                <SearchAccomm />
+                <Footer />
             </>
 
             {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}

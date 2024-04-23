@@ -21,7 +21,24 @@ function SearchAccomm() {
             <br></br>
             <button id="bookAccommButton" onClick={bookAccomm}> Book It!</button>
         </li>;
-        });
+
+        async function bookAccomm() {
+            const deatilsToBook = {
+                "accID": `${accommodation.id}`,
+                "thedate": 240601,
+                "npeople": 1
+            };
+            document.getElementById("bookAccommButton").addEventListener('click', async () => {
+                const response2 = await fetch('http://localhost:3000/placestostay/accommodation/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(deatilsToBook)
+                });
+            })
+        }
+    });
 
     //Returning the JSX with inline styles 
     return (<div className="searchDiv">
@@ -52,22 +69,6 @@ function SearchAccomm() {
         setSearchResults(allAccommodations)
     }
 
-    async function bookAccomm() {
-        const deatilsToBook = {
-            "accID": 3,
-            "thedate": 240601,
-            "npeople": 1
-        };
-        document.getElementById("bookAccommButton").addEventListener('click', async () => {
-            const response2 = await fetch('http://localhost:3000/placestostay/accommodation/book', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(deatilsToBook)
-            });
-        })
-    }
 }
 //exporting the function 
 export default SearchAccomm

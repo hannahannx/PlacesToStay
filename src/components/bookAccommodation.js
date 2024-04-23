@@ -6,13 +6,13 @@ function BookAccomm() {
     //Creating empty state properties
     const [] = React.useState()
 
-    return(
-       <div>
-        
-       </div> //<button onClick={bookIt}> Book It! </button>
+    return (
+        <div>
+
+        </div> //<button onClick={bookIt}> Book It! </button>
     )
 
-    function bookIt(){
+    function bookIt() {
 
     }
 }
