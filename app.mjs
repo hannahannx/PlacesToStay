@@ -12,66 +12,71 @@ const db = new Database('placestostay.db');
 
 // middleware functions
 app.use(express.json())
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.static('public'));
 
 
 //home route - should render the index page for later on 
-app.get('/', (req,res)=> {
+app.get('/', (req, res) => {
     res.send('HomePageTest');
 });
 
 //testing for database connection
-app.get('/test',(req,res)=>{
-    try{
+app.get('/test', (req, res) => {
+    try {
         const smth = db.prepare(`SELECT * FROM accommodation`);
         const results = smth.all(req.params)
         res.json(results)
-    }catch(error){
-        res.status(500).json({error:error})
+    } catch (error) {
+        res.status(500).json({ error: error })
     }
 });
 
 //Task 1 - Look up all accommodation in a given location.
-app.get('/placestostay/accommodation/:location', (req,res) => {
-    try{
+app.get('/placestostay/accommodation/:location', (req, res) => {
+    try {
         const smth = db.prepare(`SELECT * FROM accommodation WHERE location=? `)
         const results = smth.all(req.params.location)
         res.json(results)
-    }catch(error){
-        res.status(500).json({error:error})
+    } catch (error) {
+        res.status(500).json({ error: error })
     }
 });
 
 //Task 2 - Look up all accommodation of a given type in a given location.
-app.get('/placestostay/accommodation/:location/type/:type',(req,res) => {
-    try{
+app.get('/placestostay/accommodation/:location/type/:type', (req, res) => {
+    try {
         const smth = db.prepare(`SELECT * FROM accommodation WHERE location=? AND type=?`)
-        const results = smth.all(req.params.location,req.params.type)
+        const results = smth.all(req.params.location, req.params.type)
         res.json(results)
-    }catch(error){
-        res.status(500).json({error:error})
+    } catch (error) {
+        res.status(500).json({ error: error })
     }
 });
 
 //Task 3 -Book a place of accommodation for a given number of people on a given date.
-app.post('/placestostay/accommodation/:accID/date/:thedate/people/:npeople', (req,res)=>{
-    try{
+app.post('/placestostay/accommodation/book', (req, res) => {
+    try {
         //checking if any of the fields are blank 
-        
-        //adding record to acc_bookings
-        const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,npeople) VALUES (?,?,?) `) //the username should be in the body - focus on tis later on 
-        const bookingResults = createBooking.run(req.params.accID,req.params.thedate,req.params.npeople)
-        //reducing the availability acc_dates
-        const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? `)
-        const availabilityResults = reduceAvailability.run(req.params.accID);
-        if (availabilityResults.changes == 1){
-            res.json({id: bookingResults.lastInsertRowId});
+        if (req.body.accID == "" || req.body.thedate == "" || req.body.npeople == "" ) {
+            res.status(400).json({ error: "One or more of your fields are blank" });
+        } else {
+            //adding record to acc_bookings
+            const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,npeople) VALUES (?,?,?) `) //the username should be in the body - focus on tis later on 
+            const bookingResults = createBooking.run(req.body.accID, req.body.thedate, req.body.npeople)
+            //reducing the availability acc_dates
+            const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? `)
+            const availabilityResults = reduceAvailability.run(req.body.accID);
+            if (availabilityResults.changes == 1) {
+                res.json({ id: bookingResults.lastInsertRowId });
+            }else{
+                res.status(404).json({error: "No accommodation with that ID"});
+            }
         }
         //JSON
-    }catch(error){
-        res.status(500).json({error: error.message});
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
