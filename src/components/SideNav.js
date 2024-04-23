@@ -1,7 +1,7 @@
 import React from "react";
 
-function SideNav(){
-    return(
+function SideNav() {
+    return (
         <div className="topNav">
             <a href="#"> Home </a>
             <a href="#"> Login </a>

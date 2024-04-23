@@ -59,7 +59,7 @@ app.get('/placestostay/accommodation/:location/type/:type', (req, res) => {
 app.post('/placestostay/accommodation/book', (req, res) => {
     try {
         //checking if any of the fields are blank 
-        if (req.body.accID == "" || req.body.thedate == "" || req.body.npeople == "" ) {
+        if (req.body.accID == "" || req.body.thedate == "" || req.body.npeople == "") {
             res.status(400).json({ error: "One or more of your fields are blank" });
         } else {
             //adding record to acc_bookings
@@ -70,8 +70,8 @@ app.post('/placestostay/accommodation/book', (req, res) => {
             const availabilityResults = reduceAvailability.run(req.body.accID);
             if (availabilityResults.changes == 1) {
                 res.json({ id: bookingResults.lastInsertRowId });
-            }else{
-                res.status(404).json({error: "No accommodation with that ID"});
+            } else {
+                res.status(404).json({ error: "No accommodation with that ID" });
             }
         }
         //JSON
