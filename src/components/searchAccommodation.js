@@ -8,6 +8,7 @@ function SearchAccomm() {
     //Creating empty state properties so they can be populated later on
     const [currentAccomm, setCurrentAccomm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
+    const [newAccID, setNewAccID] = React.useState([]);
 
     //Mapping to display the list of all accommodations in the database which meet the conditions
     const allAccommodations = searchResults.map(accommodation => {
@@ -18,13 +19,14 @@ function SearchAccomm() {
             Location {accommodation.location} <br></br>
             Latitude: {accommodation.latitude} <br></br>
             Longitude: {accommodation.longitude} <br></br>
-            <br></br>
             <button id="bookAccommButton" onClick={bookAccomm}> Book It!</button>
+            <br></br>
         </li>;
 
         async function bookAccomm() {
+            
             const deatilsToBook = {
-                "accID": `${accommodation.id}`,
+                "accID": `${setNewAccID(accommodation.id)}`,
                 "thedate": 240601,
                 "npeople": 1
             };
