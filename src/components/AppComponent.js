@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Header from './Header';
 import SideNav from './SideNav';
 import "./AppComponent.css";
+import Map from './MapWithMarker';
 
 //using lifting up state 
 function AppComponent() {
@@ -14,6 +15,7 @@ function AppComponent() {
                 <Header />
                 {/* <SideNav/> */}
                 <SearchAccomm />
+                <Map/>
                 <Footer />
             </>
 
