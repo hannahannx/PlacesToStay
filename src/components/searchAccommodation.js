@@ -8,12 +8,12 @@ function SearchAccomm() {
     //Creating empty state properties so they can be populated later on
     const [currentAccomm, setCurrentAccomm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
-    const [newAccID, setNewAccID] = React.useState([]);
 
     //Mapping to display the list of all accommodations in the database which meet the conditions
     const allAccommodations = searchResults.map(accommodation => {
         //Task 5 - Create a book button for each result 
-        return <li key={accommodation.id}>
+        const newAccID = accommodation.id
+        return <li key={newAccID}>
             Name: {accommodation.name} <br></br>
             Type: {accommodation.type} <br></br>
             Location {accommodation.location} <br></br>
@@ -23,21 +23,26 @@ function SearchAccomm() {
             <br></br>
         </li>;
 
-        async function bookAccomm() {
-            
+        async function bookAccomm() {  
+            //Creates the varibale that gets the current accID
             const deatilsToBook = {
-                "accID": `${setNewAccID(accommodation.id)}`,
-                "thedate": 240601,
-                "npeople": 1
+                accID: `${newAccID}`,
+                thedate: 240601,
+                username: 'test2', //this should be equal to the cureent suername for the session
+                npeople: 1
             };
             document.getElementById("bookAccommButton").addEventListener('click', async () => {
-                const response2 = await fetch('http://localhost:3000/placestostay/accommodation/book', {
+                try{
+                    const response2 = await fetch('http://localhost:3000/placestostay/accommodation/book', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(deatilsToBook)
                 });
+                }catch (error){
+                    res.status(404).json({ error: "Sorry we couldnt book this location" });
+                }
             })
         }
     });

@@ -59,12 +59,12 @@ app.get('/placestostay/accommodation/:location/type/:type', (req, res) => {
 app.post('/placestostay/accommodation/book', (req, res) => {
     try {
         //checking if any of the fields are blank 
-        if (req.body.accID == "" || req.body.thedate == "" || req.body.npeople == "") {
+        if (req.body.accID == "" || req.body.thedate == "" || req.body.username == ""|| req.body.npeople == "") {
             res.status(400).json({ error: "One or more of your fields are blank" });
         } else {
             //adding record to acc_bookings
-            const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,npeople) VALUES (?,?,?) `) //the username should be in the body - focus on tis later on 
-            const bookingResults = createBooking.run(req.body.accID, req.body.thedate, req.body.npeople)
+            const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,username,npeople) VALUES (?,?,?,?) `) //the username should be in the body - focus on tis later on 
+            const bookingResults = createBooking.run(req.body.accID, req.body.thedate, req.body.username, req.body.npeople)
             //reducing the availability acc_dates
             const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? `)
             const availabilityResults = reduceAvailability.run(req.body.accID);
