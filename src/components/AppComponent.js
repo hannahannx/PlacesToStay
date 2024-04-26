@@ -10,17 +10,14 @@ import Map from './MapWithMarker';
 function AppComponent() {
 
     return (
-        <main>
             <>
                 <Header />
                 {/* <SideNav/> */}
                 <SearchAccomm />
                 <Map/>
                 <Footer />
+                {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}
             </>
-
-            {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}
-        </main>
     )
 }
 
