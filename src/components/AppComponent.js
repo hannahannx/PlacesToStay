@@ -14,7 +14,11 @@ function AppComponent() {
                 <Header />
                 {/* <SideNav/> */}
                 <SearchAccomm />
-                <Map/>
+                <div className='mainContentDiv'>
+                    <Map/>
+                    <br></br>
+                </div>
+                
                 <Footer />
                 {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}
             </>

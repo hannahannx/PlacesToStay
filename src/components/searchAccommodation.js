@@ -19,17 +19,21 @@ function SearchAccomm() {
             Location {accommodation.location} <br></br>
             Latitude: {accommodation.latitude} <br></br>
             Longitude: {accommodation.longitude} <br></br>
-            <button id="bookAccommButton" onClick={bookAccomm}> Book It!</button>
+            <button id="bookAccommButton" onClick={() => bookAccomm(newAccID)}> Book It!</button>
             <br></br>
         </li>;
 
-        async function bookAccomm() {  
+        async function bookAccomm(currentID) {  
+            const searchAccom = allAccommodations.map(current =>{
+
+            }
+            )
             //Creates the varibale that gets the current accID
             const deatilsToBook = {
-                accID: `${newAccID}`,
-                thedate: 240601,
-                username: 'test2', //this should be equal to the cureent suername for the session
-                npeople: 1
+                "accID": currentID,
+                "thedate": 240601,
+                "username": "test2", //this should be equal to the cureent suername for the session
+                "npeople": 1
             };
             document.getElementById("bookAccommButton").addEventListener('click', async () => {
                 try{
@@ -48,7 +52,7 @@ function SearchAccomm() {
     });
 
     //Returning the JSX with inline styles 
-    return (<div className="searchDiv">
+    return (<div className="mainContentDiv">
         <p>Please enter the location you would like to search for:</p>
         <button onClick={updateLocationName}>Update Location Name</button>
         <input placeholder="Location Name..." id="location" />

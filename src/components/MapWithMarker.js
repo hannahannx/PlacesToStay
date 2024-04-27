@@ -1,5 +1,5 @@
 import React from "react";
-import "leaflet"
+import "leaflet";
 
 function Map({ lat1, lon1 }) {
     const map = React.useRef(null);
@@ -15,13 +15,22 @@ function Map({ lat1, lon1 }) {
         ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             { attribution: "Copyright OSM contributors, ODBL" } ).addTo(map.current);
         const pos = [lat, lon];    
-        map.current.setView(pos, 14);
+        map.current.setView(pos, 15);
 
         // Handle the map moveend event by updating the state appropriately
         map.current.on("moveend", e=> {
             const centre = map.current.getCenter();
             setLat(centre.lat);
             setLon(centre.lng);
+        });
+
+        map.current.on("click", e => {
+            // "e.latlng" is an object (of type L.LatLng) representing the mouse click 
+            // position
+            // It has two properties, "lat" is the latitude and "lng" is the longitude.
+            const marker = L.marker(pos).addTo(map.current);
+            marker.bindPopup("My Location");
+            alert(`You clicked at:${e.latlng.lat} ${e.latlng.lng}`);
         });
     },[]);
 
@@ -36,6 +45,8 @@ function Map({ lat1, lon1 }) {
         </div>
     );
     
+//for each item which is on the search accom list, place a marker with the infomation for that positon on the map
+
     function setPos() {
         const lt = document.getElementById('lat').value;
         const lng = document.getElementById('lon').value;
