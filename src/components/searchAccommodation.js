@@ -12,25 +12,20 @@ function SearchAccomm() {
     //Mapping to display the list of all accommodations in the database which meet the conditions
     const allAccommodations = searchResults.map(accommodation => {
         //Task 5 - Create a book button for each result 
-        const newAccID = accommodation.id
-        return <li key={newAccID}>
+        return <li key={accommodation.id}>
             Name: {accommodation.name} <br></br>
             Type: {accommodation.type} <br></br>
             Location {accommodation.location} <br></br>
             Latitude: {accommodation.latitude} <br></br>
             Longitude: {accommodation.longitude} <br></br>
-            <button id="bookAccommButton" onClick={() => bookAccomm(newAccID)}> Book It!</button>
+            <button id="bookAccommButton" onClick={() => bookAccomm(accommodation.id)}> Book It!</button>
             <br></br>
         </li>;
 
         async function bookAccomm(currentID) {  
-            const searchAccom = allAccommodations.map(current =>{
-
-            }
-            )
             //Creates the varibale that gets the current accID
             const deatilsToBook = {
-                "accID": currentID,
+                "accID": document.getElementById('bookAccommButton').value,
                 "thedate": 240601,
                 "username": "test2", //this should be equal to the cureent suername for the session
                 "npeople": 1

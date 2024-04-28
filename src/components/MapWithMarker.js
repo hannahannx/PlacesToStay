@@ -9,21 +9,18 @@ function Map({ lat1, lon1 }) {
     React.useEffect( ()=> {
         // As effect will run only once, there is no need to check if map.current is null
         map.current = L.map("map1");
-
         // Set the map up in the normal way
         L.tileLayer
         ("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             { attribution: "Copyright OSM contributors, ODBL" } ).addTo(map.current);
         const pos = [lat, lon];    
         map.current.setView(pos, 15);
-
         // Handle the map moveend event by updating the state appropriately
         map.current.on("moveend", e=> {
             const centre = map.current.getCenter();
             setLat(centre.lat);
             setLon(centre.lng);
         });
-
         map.current.on("click", e => {
             // "e.latlng" is an object (of type L.LatLng) representing the mouse click 
             // position
