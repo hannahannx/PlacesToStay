@@ -66,8 +66,8 @@ app.post('/placestostay/accommodation/book', (req, res) => {
             const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,username,npeople) VALUES (?,?,?,?) `) //the username should be in the body - focus on tis later on 
             const bookingResults = createBooking.run(req.body.accID, req.body.thedate, req.body.username, req.body.npeople)
             //reducing the availability acc_dates
-            const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? AND username=? `)
-            const availabilityResults = reduceAvailability.run(req.body.accID,req.body.username);
+            const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? AND thedate=? `)
+            const availabilityResults = reduceAvailability.run(req.body.accID,req.body.thedate);
             if (availabilityResults.changes == 1) {
                 res.json({ id: bookingResults.lastInsertRowId });
             } else {

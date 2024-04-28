@@ -18,16 +18,16 @@ function SearchAccomm() {
             Location {accommodation.location} <br></br>
             Latitude: {accommodation.latitude} <br></br>
             Longitude: {accommodation.longitude} <br></br>
-            <button id="bookAccommButton" onClick={() => bookAccomm(accommodation.id)}> Book It!</button>
+            <button id="bookAccommButton" onClick={()=>bookAccomm(`${accommodation.id}`)}> Book It!</button>
             <br></br>
         </li>;
 
-        async function bookAccomm(currentID) {  
+        async function bookAccomm(accID) {  
             //Creates the varibale that gets the current accID
             const deatilsToBook = {
-                "accID": document.getElementById('bookAccommButton').value,
+                "accID": accID ,
                 "thedate": 240601,
-                "username": "test2", //this should be equal to the cureent suername for the session
+                "username": "test3", //this should be equal to the cureent suername for the session
                 "npeople": 1
             };
             document.getElementById("bookAccommButton").addEventListener('click', async () => {
