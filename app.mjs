@@ -102,7 +102,7 @@ app.post('/placestostay/accommodation/book', (req, res) => {
             res.status(400).json({ error: "One or more of your fields are blank" });
         } else {
             //adding record to acc_bookings
-            const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,username,npeople) VALUES (?,?,?,?) `) //the username should be in the body - focus on tis later on 
+            const createBooking = db.prepare(`INSERT INTO acc_bookings(accID,thedate,username,npeople) VALUES (?,?,?,?) `)
             const bookingResults = createBooking.run(req.body.accID, req.body.thedate, req.body.username, req.body.npeople)
             //reducing the availability acc_dates
             const reduceAvailability = db.prepare(`UPDATE acc_dates SET availability=availability-1 WHERE accID=? AND thedate=? `)
