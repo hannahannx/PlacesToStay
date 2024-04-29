@@ -24,12 +24,11 @@ function Map({ lat1, lon1 }) {
         });
     }, []);
 
-
     return (
         <div className="mainContentDiv">
             <input id='lat' placeholder="Latitude..." />
             <input id='lon' placeholder="Longitude..." />
-            <input type='button' value='go' onClick={setPos} />
+            <input type='button' value='Click to display with marker on map' onClick={setPos} />
             <p>Map centred at: {lat} {lon}</p>
             <div id="map1" style={{ height: "500px", alignItems: "center", justifyContent: "center" }}></div>
         </div>
