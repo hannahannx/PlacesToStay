@@ -24,12 +24,12 @@ function LoginUser() {
 
   function updatePassword() {
     setPassword(document.getElementById('password').value);
-  }
+  } 
 
   async function login() {
     const userInfo = {
-      "username": "tim",
-      "password": "tim123"
+      "username": document.getElementById("username").value,
+      "password": document.getElementById("password").value,
     }
     try {
       const response = await fetch('http://localhost:3000/login', {
@@ -41,12 +41,13 @@ function LoginUser() {
         
       });
       if (response.status == 200) {
-        alert(`Successfully logged in as...${updateUsername} `)
+        setLoginStatus(`Logged in!`)
       } else if (response.status == 400) {
-        alert("You have blank fields in at least one input");
+        alert("Sorry, that combination doesn't match...");
       } else {
         alert(`Unknown error: code ${response.status}`);
       }
+
     } catch (error) {
       res.status(404).json({ error: "Sorry we couldnt access this login" });
     }

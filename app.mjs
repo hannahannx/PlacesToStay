@@ -55,7 +55,7 @@ app.post('/login', (req, res) => {
         }
     }catch(e){
         res.status(500).json({ error: error })
-    }   
+    }    
     }
     
 });
@@ -68,24 +68,9 @@ app.post('/logout', (req, res) => {
 
 // 'GET' login route - useful for clients to obtain currently logged in user
 app.get('/login', (req, res) => {
-    res.json({username: req.session.username || null} );
-});
-
-//home route - should render the index page for later on 
-app.get('/', (req, res) => {
-    res.send('HomePageTest');
-});
-
-//testing for database connection
-app.get('/test', (req, res) => {
-    try {
-        const smth = db.prepare(`SELECT * FROM accommodation`);
-        const results = smth.all(req.params)
-        res.json(results)
-    } catch (error) {
-        res.status(500).json({ error: error })
-    }
-});
+    if(req.session.user){
+        res.send({username: req.session.username || null});
+}});
 
 //Task 1 - Look up all accommodation in a given location.
 app.get('/placestostay/accommodation/:location', (req, res) => {

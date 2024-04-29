@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SearchAccomm from './searchAccommodation';
 import Footer from './Footer';
 import Header from './Header';
-import SideNav from './SideNav';
 import "./AppComponent.css";
 import Map from './MapWithMarker';
 import LoginUser from './loginUser';
@@ -14,11 +13,9 @@ function AppComponent() {
             <>
                 <Header />
                 <LoginUser />
-                {/* <SideNav/> */}
                 <SearchAccomm />
                 <Map/>
-                <Footer />
-                
+                <Footer />   
                 {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}
             </>
     )
