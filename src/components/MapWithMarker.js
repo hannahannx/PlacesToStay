@@ -44,7 +44,7 @@ function Map({ lat1, lon1 }) {
         setLon(lng);
         map.current.setView([lt, lng], 14);
         const marker = L.marker([lt,lng]).addTo(map.current);
-        marker.bindPopup("My Location");
+        marker.bindPopup(`Latitude : ${lt} Longitude : ${lng} `);
     }
 }
 
