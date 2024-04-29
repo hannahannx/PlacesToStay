@@ -4,11 +4,17 @@
 import express from 'express';
 import Database from 'better-sqlite3';
 import cors from 'cors';
+import expressSession from 'express-session';
+import betterSqlite3Session from 'express-session-better-sqlite3';
 
 //variables
 const PORT = 3000;
 const app = express();
 const db = new Database('placestostay.db');
+//database to store sessions 
+const sessDb = new Database('session.db');
+//object for session store
+const SqliteStore = betterSqlite3Session(expressSession, sessDb);
 
 // middleware functions
 app.use(express.json())
@@ -16,6 +22,54 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.static('public'));
 
+app.use(expressSession({
+    store: new SqliteStore(),
+    secret: 'absoluteT5',
+    resave: true,
+    saveUninitialized: false,
+    rolling: true,
+    unset: 'destroy',
+    proxy: true,
+    cookie: {
+        maxAge: 60000,
+        httpOnly: false
+    }
+}));
+
+// Login route
+app.post('/login', (req, res) => {
+    if (req.body.username == "" || req.body.password == "" ) {
+        res.status(400).json({ error: "One or more of your fields are blank" });
+    }else{
+      try{
+        const smth = db.prepare(`SELECT * FROM acc_users WHERE username=? AND password=?`)
+        const results = smth.all(req.body.username,req.body.password);
+        if (results.length == 1){
+            req.session.username = req.body.username;
+            console.log(req.session.username)
+            const loginStatus = `Sucessfully logged in as ${req.session.username}`
+            res.send(loginStatus)
+            console.log(loginStatus)
+        }else{
+            res.status(400).json({error: "Incorrect login combination"});
+        }
+    }catch(e){
+        res.status(500).json({ error: error })
+    }   
+    }
+    
+});
+
+// Logout route
+app.post('/logout', (req, res) => {
+    req.session = null;
+    res.json({'success': 1 });
+});
+
+// 'GET' login route - useful for clients to obtain currently logged in user
+app.get('/login', (req, res) => {
+    res.json({username: req.session.username || null} );
+});
 
 //home route - should render the index page for later on 
 app.get('/', (req, res) => {
@@ -59,7 +113,7 @@ app.get('/placestostay/accommodation/:location/type/:type', (req, res) => {
 app.post('/placestostay/accommodation/book', (req, res) => {
     try {
         //checking if any of the fields are blank 
-        if (req.body.accID == "" || req.body.thedate == "" || req.body.username == ""|| req.body.npeople == "") {
+        if (req.body.accID == (""||0) || req.body.thedate == "" || req.body.username == ""|| req.body.npeople == "") {
             res.status(400).json({ error: "One or more of your fields are blank" });
         } else {
             //adding record to acc_bookings

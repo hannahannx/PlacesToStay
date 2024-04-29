@@ -33,9 +33,9 @@ function Map({ lat1, lon1 }) {
 
 
     return(
-        <div>
-        Lat: <input id='lat' />
-        Lon: <input id='lon' />
+        <div className="mainContentDiv">
+        <input id='lat' placeholder="Latitude..."/>
+        <input id='lon' placeholder="Longitude..."/>
         <input type='button' value='go' onClick={setPos} />
         <p>Map centred at: {lat} {lon}</p>
         <div id="map1" style={{height:"500px", alignItems: "center", justifyContent: "center"}}></div>

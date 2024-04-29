@@ -5,6 +5,7 @@ import Header from './Header';
 import SideNav from './SideNav';
 import "./AppComponent.css";
 import Map from './MapWithMarker';
+import LoginUser from './loginUser';
 
 //using lifting up state 
 function AppComponent() {
@@ -12,14 +13,12 @@ function AppComponent() {
     return (
             <>
                 <Header />
+                <LoginUser />
                 {/* <SideNav/> */}
                 <SearchAccomm />
-                <div className='mainContentDiv'>
-                    <Map/>
-                    <br></br>
-                </div>
-                
+                <Map/>
                 <Footer />
+                
                 {/* use if statements to display certain sections of the page () for example when a session based system is there.  */}
             </>
     )
