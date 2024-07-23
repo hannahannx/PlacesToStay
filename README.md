@@ -2,8 +2,7 @@
 
 ## A web Application using React.js,Node.js and Express, using AJAX APIs and SQLite.
 
-Intro paragraph
-This application has used essential technologies and frameworks including Node.js, React, and Express for front-end development.Additionally, HTML (Hyper Text Markup Language), JavaScript, and AJAX (Asynchronous JavaScript and XML) to facilitate seamless user interactions and dynamic content delivery.
+This application has used essential technologies and frameworks including Node.js, React, and Express for front-end development. Additionally, HTML (Hyper Text Markup Language), JavaScript, and AJAX (Asynchronous JavaScript and XML) to facilitate seamless user interactions and dynamic content delivery.
 
 
 ## Installation instructions for the user 
